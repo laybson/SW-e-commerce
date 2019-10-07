@@ -73,7 +73,7 @@ export default class EditItem extends Component {
                     <div className="form-group">
                         <label>Item Price:</label>
                         <input
-                            type="text"
+                            type="number"
                             className="form-control"
                             value={ this.state.itemPrice }
                             onChange={ this.onChangeItemPrice }/>

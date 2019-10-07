@@ -3,26 +3,7 @@ import { Link } from 'react-router-dom';
 import CartItemsList from './cart-items-list.component';
 import Item from './item.component';
 import axios from 'axios';
-/*
-const Item = props => (
-    <tr>
-        <td>{ props.item.itemName }</td>
-        <td>{ props.item.itemPrice }</td>
-        <td>
-            <Link to={ "/edit/"+props.item._id }>
-                edit
-            </Link> | 
-            <a href="#" onClick={() => {
-                props.deleteItem(props.item._id)}}>
-                    delete
-            </a> |
-            <a href="#" onClick={() => {
-                props.addToCart(props.item._id)}}>
-                    CART
-            </a>
-        </td>
-    </tr>
-)*/
+
 
 export default class ItemsList extends Component {
     constructor(props) {
@@ -61,8 +42,7 @@ export default class ItemsList extends Component {
             .then(res => {
                 console.log("HERE", res.data);
                 return <CartItemsList 
-                    addCartItem={ this.props.addCartItem(res.data) }                
-                 />
+                    addCartItem={ this.props.addCartItem(res.data) }/>
             });
     }
 
