@@ -1,31 +1,35 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import CartItemsList from './cart-items-list.component';
+import Item from './item.component';
 import axios from 'axios';
-
+/*
 const Item = props => (
     <tr>
-        
-            <td>{ props.item.itemName }</td>
-            <td>{ props.item.itemPrice }</td>
-            <td>
-                <Link to={ "/edit/"+props.item._id }>
-                    edit
-                </Link> | 
-                <a href="#" onClick={() => {
-                    props.deleteItem(props.item._id)}}>
-                     delete
-                </a>
-            </td>
-       
-        
+        <td>{ props.item.itemName }</td>
+        <td>{ props.item.itemPrice }</td>
+        <td>
+            <Link to={ "/edit/"+props.item._id }>
+                edit
+            </Link> | 
+            <a href="#" onClick={() => {
+                props.deleteItem(props.item._id)}}>
+                    delete
+            </a> |
+            <a href="#" onClick={() => {
+                props.addToCart(props.item._id)}}>
+                    CART
+            </a>
+        </td>
     </tr>
-)
+)*/
 
 export default class ItemsList extends Component {
     constructor(props) {
         super(props);
 
         this.deleteItem = this.deleteItem.bind(this);
+        this.addToCart = this.addToCart.bind(this);
 
         this.state = {
             items: []
@@ -50,6 +54,16 @@ export default class ItemsList extends Component {
         this.setState({
             items: this.state.items.filter(el => el._id !== id)
         })
+    }
+
+    addToCart(id) {        
+        axios.get('http://localhost:5000/items/'+id)
+            .then(res => {
+                console.log("HERE", res.data);
+                return <CartItemsList 
+                    addCartItem={ this.props.addCartItem(res.data) }                
+                 />
+            });
     }
 
     itemsList() {
