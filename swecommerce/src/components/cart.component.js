@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import CartItem from './cart-item.component';
-import { Link } from 'react-router-dom';
+import cart from './cart-actions';
 import CartItemsList from './cart-items-list.component';
 
 export default class Cart extends Component {
     constructor(props) {
         super(props);
-    }
+
+    }   
     
     render() {
         return (

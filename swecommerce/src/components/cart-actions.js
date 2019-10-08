@@ -1,3 +1,5 @@
+import promos from './promos';
+
 const cart = {  
     addCartItem(cartItem, callback) {
         let cart = []
@@ -8,12 +10,12 @@ const cart = {
             let itemIndex = this.cartItemIndex(cart, cartItem.item._id);
             if (itemIndex < 0) {
                 cartItem.quantity = 1;
-                cart.push(cartItem)
-                localStorage.setItem('cart', JSON.stringify(cart))
+                cartItem.totalPrice = this.cartItemTotalPrice(cartItem);
+                cart.push(cartItem);
+                localStorage.setItem('cart', JSON.stringify(cart));
             } else {
                 this.addOne(cart[itemIndex])
             }
-            console.log(cart);
             callback()
         }
     },
@@ -21,7 +23,27 @@ const cart = {
     addOne(cartItem) {
         let itemID = cartItem.item._id;
         let quantity = cartItem.quantity+1;
-        this.updateQuantity(itemID, quantity)
+        this.updateQuantity(itemID, quantity);        
+    },
+
+    cartItemTotalPrice(cartItem) {
+        let price = cartItem.item.itemPrice;
+        let activePromo = cartItem.promo;
+        return (activePromo ? promos[activePromo].promo(cartItem) : cartItem.quantity *  price);
+    },
+
+    updatePromo(itemID, promo) {        
+        let cart = []
+        if (typeof window !== "undefined") {
+            if (localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'))
+            }
+            let itemIndex = this.cartItemIndex(cart, itemID)
+            cart[itemIndex].promo = promo
+            cart[itemIndex].totalPrice = this.cartItemTotalPrice(cart[itemIndex]);
+            localStorage.setItem('cart', JSON.stringify(cart))
+        }
+               
     },
 
     updateQuantity(itemID, quantity) {
@@ -34,7 +56,8 @@ const cart = {
                     cart = JSON.parse(localStorage.getItem('cart'))
                 }
                 let itemIndex = this.cartItemIndex(cart, itemID)
-                cart[itemIndex].quantity = quantity
+                cart[itemIndex].quantity = Number(quantity)
+                cart[itemIndex].totalPrice = this.cartItemTotalPrice(cart[itemIndex]);
                 localStorage.setItem('cart', JSON.stringify(cart))
             }
         }        

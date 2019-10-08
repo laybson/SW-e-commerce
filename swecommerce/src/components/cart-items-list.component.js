@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import CartItem from './cart-item.component';
 import cart from './cart-actions';
 
@@ -10,8 +8,10 @@ export default class CartItemsList extends Component {
 
         this.deleteCartItem = this.deleteCartItem.bind(this);
         this.updateQuantity = this.updateQuantity.bind(this);
+        this.selectPromo = this.selectPromo.bind(this);
 
         this.state = {
+            promosList: [],
             cartItems: []
         };
     }
@@ -20,26 +20,32 @@ export default class CartItemsList extends Component {
         this.setState({cartItems: cart.getCart()})
     }
     
-    deleteCartItem(id) {               
+    deleteCartItem = (id) => {               
         this.setState({
             cartItems: cart.deleteCartItem(id)
         })
     }
     
-    updateQuantity(id ,e) {
+    updateQuantity = (id ,e) => {
         e.preventDefault();
         cart.updateQuantity(id, e.target.value)
 
         this.setState({cartItems: cart.getCart()})
     }
+
+    selectPromo = (id ,e) => {
+        cart.updatePromo(id, e.target.value)
+        this.setState({ cartItems: cart.getCart() })
+    }
     
-    cartItemsList() {
-        console.log(this.state.cartItems)
+    cartItemsList() {        
         return this.state.cartItems.map(currentCartItem => {
+            console.log(currentCartItem);
             return <CartItem 
                 cartItem={ currentCartItem }
                 deleteCartItem={ this.deleteCartItem }
                 updateQuantity={ this.updateQuantity }
+                selectPromo={ this.selectPromo }
                 key={ currentCartItem.item._id }/>
         })
     }
