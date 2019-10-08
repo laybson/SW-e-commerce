@@ -1,5 +1,5 @@
 const promos = {
-    pagueUmLeveDois: {
+    'Pague 1 Leve 2': {
         promo(cartItem) {
             let quantity = Number(cartItem.quantity);
             let price = Number(cartItem.item.itemPrice);
@@ -8,7 +8,7 @@ const promos = {
         }
     },
 
-    tresPorDez: {
+    '3 por R$10,00': {
         promo(cartItem) {
             let quantity = Number(cartItem.quantity);
             let price = Number(cartItem.item.itemPrice);
