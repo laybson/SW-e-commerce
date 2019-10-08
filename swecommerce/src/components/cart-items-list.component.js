@@ -11,18 +11,22 @@ export default class CartItemsList extends Component {
         this.selectPromo = this.selectPromo.bind(this);
 
         this.state = {
-            promosList: [],
-            cartItems: []
+            cartItems: [],
+            totalPrice: 0
         };
     }
 
     componentDidMount = () => {
-        this.setState({cartItems: cart.getCart()})
+        this.setState({ 
+            cartItems: cart.getCart(),
+            totalPrice: cart.getTotalPrice()
+        })
     }
     
     deleteCartItem = (id) => {               
         this.setState({
-            cartItems: cart.deleteCartItem(id)
+            cartItems: cart.deleteCartItem(id),
+            totalPrice: cart.getTotalPrice()
         })
     }
     
@@ -30,17 +34,22 @@ export default class CartItemsList extends Component {
         e.preventDefault();
         cart.updateQuantity(id, e.target.value)
 
-        this.setState({cartItems: cart.getCart()})
+        this.setState({ 
+            cartItems: cart.getCart(),
+            totalPrice: cart.getTotalPrice()
+        })
     }
 
     selectPromo = (id ,e) => {
         cart.updatePromo(id, e.target.value)
-        this.setState({ cartItems: cart.getCart() })
+        this.setState({ 
+            cartItems: cart.getCart(),
+            totalPrice: cart.getTotalPrice()
+        })
     }
     
     cartItemsList() {        
         return this.state.cartItems.map(currentCartItem => {
-            console.log(currentCartItem);
             return <CartItem 
                 cartItem={ currentCartItem }
                 deleteCartItem={ this.deleteCartItem }
@@ -68,6 +77,9 @@ export default class CartItemsList extends Component {
                         { this.cartItemsList() }
                     </tbody>
                 </table>
+                <div>
+                    <h5>Total: { this.state.totalPrice }</h5>
+                </div>
             </div>
         );
     }
