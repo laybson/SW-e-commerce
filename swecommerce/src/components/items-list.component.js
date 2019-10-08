@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import CartItemsList from './cart-items-list.component';
 import Item from './item.component';
 import axios from 'axios';
+import { GridList, GridListTile } from '@material-ui/core';
 
 
 export default class ItemsList extends Component {
@@ -47,30 +47,27 @@ export default class ItemsList extends Component {
     }
 
     itemsList() {
-        return this.state.items.map(currentItem => {
-            return <Item 
+        return this.state.items.map((currentItem, i) => (
+            <GridListTile key={i}>
+              <Item 
                 item={ currentItem }
                 deleteItem={ this.deleteItem }
                 key={ currentItem._id }/>
-        })
+            </GridListTile>
+        ))
     }
 
     render() {
         return (
             <div>
-                <h3>Items</h3>
-                <table className="table">
-                    <thead className="thead-light">
-                        <tr>
-                            <th>Item</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { this.itemsList() }
-                    </tbody>
-                </table>
+                <h4>Explore nossa loja!</h4>
+                <div>
+                    <div>
+                        <GridList cols={3}>
+                            { this.itemsList() }
+                        </GridList>
+                    </div>
+                </div>                
             </div>
         );
     }

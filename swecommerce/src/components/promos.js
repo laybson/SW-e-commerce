@@ -14,7 +14,7 @@ const promos = {
             let price = Number(cartItem.item.itemPrice);
             let fullPriceItems = quantity % 3
             let promoPriceItems = (quantity-fullPriceItems) / 3;
-            return promoPriceItems * 10 + fullPriceItems * price;
+            return promoPriceItems * 1000 + fullPriceItems * price;
         }
     }
 }

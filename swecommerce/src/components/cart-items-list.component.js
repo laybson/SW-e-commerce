@@ -66,11 +66,11 @@ export default class CartItemsList extends Component {
                     <thead className="thead-light">
                         <tr>
                             <th>Item</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Promotion</th>
-                            <th>Total Price</th>
-                            <th>Action</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Promoção</th>
+                            <th>Preço Total</th>
+                            <th> </th>
                         </tr>
                     </thead>
                     <tbody>

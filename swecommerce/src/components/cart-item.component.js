@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import promos from './promos';
+import {TextField, Select} from '@material-ui/core';
 
 export default class CartItem extends Component {
     static propTypes = {
@@ -28,15 +29,18 @@ export default class CartItem extends Component {
             <tr>        
                 <td>{ item.itemName }</td>
                 <td>{ item.itemPrice }</td>
-                <td><input
-                        type="number"
-                        className="form-control"
+                <td><TextField
                         value={ quantity }
                         onChange={                            
                             (e) => { this.props.updateQuantity(item._id, e) }
-                        }/></td>
-                <td> <select ref="promoInput"                        
-                        className="form-control"                        
+                        }
+                        type="number"
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                        margin="normal"
+                    /></td>
+                <td> <Select native                      
                         value={ promo }
                         onChange={ 
                             (e) => { this.props.selectPromo(item._id, e) }
@@ -50,7 +54,7 @@ export default class CartItem extends Component {
                                 </option>;
                             })
                         }
-                    </select> </td>
+                    </Select> </td>
                 <td>{ totalPrice }</td>
                 <td>                         
                     <a href="#" onClick={() => {

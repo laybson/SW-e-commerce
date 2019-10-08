@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 //import logo from './logo.svg';
 import './App.css';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles'
 
 import Navbar from './components/navbar.component';
 import ItemsList from './components/items-list.component';
@@ -12,7 +13,7 @@ import Cart from './components/cart.component';
 
 function App() {
   return (
-    <Router>     
+    <Router>
       <Navbar />
       <br/>
       <div className="container">
