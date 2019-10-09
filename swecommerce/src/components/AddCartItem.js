@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import cart from './cart-actions';
+import cart from '../helpers/cart-helper';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 

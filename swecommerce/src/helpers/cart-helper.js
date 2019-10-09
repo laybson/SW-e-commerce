@@ -1,4 +1,4 @@
-import promos from './promos';
+import promos from './promo-helper';
 
 const cart = {  
     addCartItem(cartItem, callback) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import promos from './promos';
+import promos from '../helpers/promo-helper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {TextField, Select, IconButton} from '@material-ui/core';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CartItemsList from './cart-items-list.component';
-import Item from './item.component';
+import CartItemsList from '../components/CartItemsList';
+import Item from '../components/Item';
 import axios from 'axios';
 import { GridList, GridListTile } from '@material-ui/core';
 

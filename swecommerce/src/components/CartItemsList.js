@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CartItem from './cart-item.component';
-import cart from './cart-actions';
+import CartItem from './CartItem';
+import cart from '../helpers/cart-helper';
 
 export default class CartItemsList extends Component {
     constructor(props) {

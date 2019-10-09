@@ -4,11 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //import logo from './logo.svg';
 import './App.css';
 
-import Navbar from './components/navbar.component';
-import ItemsList from './components/items-list.component';
-import EditItem from './components/edit-item.component';
-import CreateItem from './components/create-item.component';
-import Cart from './components/cart.component';
+import Navbar from './components/Navbar';
+import ItemsList from './pages/ItemsListPage';
+import EditItem from './pages/EditItemPage';
+import CreateItem from './pages/CreateItemPage';
+import Cart from './pages/CartPage';
 
 function App() {
   return (
