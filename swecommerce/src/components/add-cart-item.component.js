@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
 import cart from './cart-actions';
+import Button from '@material-ui/core/Button';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+
+
 
 export default class AddCartItem extends Component {
     constructor(props) {
         super(props);
 
-        this.onSubmit = this.onSubmit.bind(this);
+        this.addingCartItem = this.addingCartItem.bind(this);
     }    
 
-    onSubmit(e) {
+    addingCartItem(e) {
         e.preventDefault();
 
         const newCartItem = {
             item: this.props.item
         }
-        cart.addCartItem(newCartItem, () => {});
+        cart.addCartItem(newCartItem, () => { window.location = '/cart'; });
     }
 
     render() {
         return (
-            <form onSubmit={ this.onSubmit }>
-                <div className="form-group">
-                    <input 
-                        type="submit"
-                        value="Add to Cart"
-                        className="btn btn-primary"/>
-                </div>
-            </form>
+            <Button variant="outlined"  onClick={(e) => {
+                this.addingCartItem(e)}}>
+                <span><AddShoppingCartIcon /> </span>  Comprar
+            </Button>
         );
     }
 }

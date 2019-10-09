@@ -52,7 +52,7 @@ export default class CreateItem extends Component {
     render() {
         return (
             <div>
-                <h3>Create New Item</h3>
+                <h4>Adicionar Novo Item</h4>
                 <form onSubmit={ this.onSubmit }>
                     <div className="form-group">
                         <label>Item Name: </label>

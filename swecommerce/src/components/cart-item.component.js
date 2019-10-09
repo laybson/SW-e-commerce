@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import promos from './promos';
-import {TextField, Select} from '@material-ui/core';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import {TextField, Select, IconButton} from '@material-ui/core';
 
 export default class CartItem extends Component {
     static propTypes = {
@@ -56,11 +57,11 @@ export default class CartItem extends Component {
                         }
                     </Select> </td>
                 <td>{ totalPrice }</td>
-                <td>                         
-                    <a href="#" onClick={() => {
+                <td>
+                    <IconButton dense="dense" onClick={() => {
                         this.props.deleteCartItem(item._id)}}>
-                        delete
-                    </a>
+                        <DeleteForeverIcon />
+                    </IconButton>
                 </td>
             </tr>
         );

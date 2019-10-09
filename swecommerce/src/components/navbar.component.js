@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 export default class Navbar extends Component {
     render() {
@@ -10,13 +11,15 @@ export default class Navbar extends Component {
                     <div className="collapse navbar-collapse">
                         <ul className="navbar-nav mr-auto">
                             <li className="navbar-item">
-                                <Link to="/" className="nav-link">Items</Link>
+                                <Link to="/" className="nav-link">Itens</Link>
                             </li>
                             <li className="navbar-item">
-                                <Link to="/create" className="nav-link">Create Item</Link>
+                                <Link to="/create" className="nav-link">Adicionar Item</Link>
                             </li>
                             <li className="navbar-item">
-                                <Link to="/cart" className="nav-link">My Cart</Link>
+                                <Link to="/cart" className="nav-link">
+                                    <ShoppingCartIcon />
+                                </Link>
                             </li>
                         </ul>
                     </div>

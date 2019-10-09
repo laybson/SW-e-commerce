@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddCartItem from './add-cart-item.component';
-import { Card, CardHeader, CardMedia, CardContent, CardActions} from '@material-ui/core';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import EditIcon from '@material-ui/icons/Edit';
+import { 
+    Card, 
+    CardHeader, 
+    CardMedia, 
+    /*CardContent, */
+    CardActions,
+    IconButton
+} from '@material-ui/core';
 
 export default class Item extends Component {
     static propTypes = {
@@ -18,22 +27,23 @@ export default class Item extends Component {
                     subheader={ <span>R${itemPrice}</span> }
                     title={ itemName }
                 />
-                <CardContent>                    
-                    
-                </CardContent>
-                <CardActions disableSpacing> 
-                    <div>
+                <CardMedia>                    
+                    <div>                    
                         <AddCartItem 
                             item={ this.props.item }/>
-                    </div>                   
+                    </div>
+                </CardMedia>
+                <CardActions disableSpacing>
                     <div>
                         <Link to={ "/edit/"+_id }>
-                            edit
-                        </Link> | 
-                        <a href="#" onClick={() => {
+                            <IconButton dense="dense">
+                                <EditIcon />
+                            </IconButton>
+                        </Link>
+                        <IconButton dense="dense" onClick={() => {
                             this.props.deleteItem(_id)}}>
-                                delete
-                        </a>
+                            <DeleteForeverIcon />
+                        </IconButton>
                     </div>
                 </CardActions>                
             </Card>
