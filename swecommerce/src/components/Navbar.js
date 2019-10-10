@@ -45,7 +45,7 @@ export default withStyles(styles) (class Navbar extends Component {
                         </Link>
                         <div className={classes.navbar} />
                         <div className={classes.rightSection}>
-                            <Link to="/create">
+                            <Link to="/management">
                                 <IconButton>
                                     <LibraryAddIcon className={ classes.icon } />                                    
                                 </IconButton>

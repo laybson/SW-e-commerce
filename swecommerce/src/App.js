@@ -6,9 +6,8 @@ import './App.css';
 
 import Navbar from './components/Navbar';
 import ItemsList from './pages/ItemsListPage';
-import EditItem from './pages/EditItemPage';
-import CreateItem from './pages/CreateItemPage';
 import Cart from './pages/CartPage';
+import Management from './pages/ManagementPage';;
 
 function App() {
   return (
@@ -17,9 +16,8 @@ function App() {
       <br/>
       <div className="container">
         <Route path="/" exact component={ItemsList} />
-        <Route path="/edit/:id" exact component={EditItem} />
-        <Route path="/create" exact component={CreateItem} />
         <Route path="/cart" exact component={Cart} />
+        <Route path="/management" exact component={Management} />
       </div>
     </Router>
   );

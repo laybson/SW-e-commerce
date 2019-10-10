@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AddCartItem from './AddCartItem';
+import EditItemModal from './EditItemModal';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { withStyles } from '@material-ui/core/styles';
-import { Box, Typography, Container } from '@material-ui/core';
+import { IconButton, Box, Typography, Container, Grid } from '@material-ui/core';
+
 
 const styles = theme => ({
-    Item: {
+    managementItem: {
         flexGrow: 1,
-        height: 435,
+        height: 446,
         width: 276,
         backgroundColor: 'white',
         borderColor: '#E0E0E0'
@@ -17,10 +19,6 @@ const styles = theme => ({
         height: 252,
         width: 252,
         marginTop: 12,
-    },
-    add: {
-        textAlign: 'center',
-        marginBottom: 12,
     },
     title: {
         height: 75,
@@ -34,20 +32,25 @@ const styles = theme => ({
         height: 40,
         fontSize: 20,
         fontWeight: 700,
+    },
+    actions: {
+        height: 48,
+        marginBottom: 12,
     }
 });
 
-export default withStyles(styles) (class Item extends Component {    
+export default withStyles(styles) (class ManagementItem extends Component {    
     static propTypes = {
-        item: PropTypes.object.isRequired
+        item: PropTypes.object.isRequired,
+        deleteItem: PropTypes.func.isRequired
     }
 
     render() {
         const { classes } = this.props;
-        const { itemName, itemPrice } = this.props.item;
+        const { itemName, itemPrice, _id } = this.props.item;
         
         return (
-            <Box className={ classes.Item } border={1}>
+            <Box className={ classes.managementItem } border={1}>
                 <Container fixed  className={ classes.image }>
                     
                 </Container>
@@ -58,11 +61,20 @@ export default withStyles(styles) (class Item extends Component {
                     <Typography noWrap className={ classes.price } align='center'>
                         { <span>R${itemPrice}</span> }
                     </Typography>
-                </Container>
-                <Container fixed  className={ classes.add }>
-                    <AddCartItem
-                        item={ this.props.item }/>
                 </Container>                
+                <Grid container fixed className={ classes.actions }
+                    align='center'>
+                    <Grid item xs={6}>
+                        <EditItemModal
+                            id={ _id }/>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <IconButton onClick={() => {
+                            this.props.deleteItem(_id)}}>
+                            <DeleteForeverIcon />
+                        </IconButton>
+                    </Grid>
+                </Grid>
             </Box>
         );
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CartItemsList from '../components/CartItemsList';
-import Item from '../components/Item';
+import ManagementItem from '../components/ManagementItem';
+import CreateItemModal from '../components/CreateItemModal';
 import axios from 'axios';
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -11,20 +11,20 @@ const styles = theme => ({
     },
     grid: {
         flexGrow: 1,
-    },
+    }
 });
 
-export default withStyles(styles) (class ItemsList extends Component {        
+export default withStyles(styles) (class Management extends Component {        
     constructor(props) {
         super(props);
 
         this.deleteItem = this.deleteItem.bind(this);
-        this.addToCart = this.addToCart.bind(this);
 
         this.state = {
-            items: []
-        };
-    }    
+            items: [],
+            addModalOpen: false,
+        };        
+    }
 
     componentDidMount() {
         axios.get('http://localhost:5000/items/')
@@ -36,7 +36,7 @@ export default withStyles(styles) (class ItemsList extends Component {
             .catch((error) => {
                 console.log(error);
             });
-    }
+    }    
 
     deleteItem(id) {
         axios.delete('http://localhost:5000/items/'+id)
@@ -46,30 +46,23 @@ export default withStyles(styles) (class ItemsList extends Component {
         })
     }
 
-    addToCart(id) {        
-        axios.get('http://localhost:5000/items/'+id)
-            .then(res => {
-                return <CartItemsList 
-                    addCartItem={ this.props.addCartItem(res.data) }/>
-            });
-    }
-
     itemsList() {
         return this.state.items.map((currentItem, i) => (
             <Grid key={i}>
-              <Item 
+              <ManagementItem 
                 item={ currentItem }
+                deleteItem={ this.deleteItem }
                 key={ currentItem._id }/>
             </Grid>
         ))
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes } = this.props; 
 
         return (
             <div className={ classes.itemsList }>
-                <h5>Explore nossa loja!</h5>
+                <CreateItemModal />                             
                 <div>
                     <div>
                         <Grid container>
