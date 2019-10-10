@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import EditItemModal from './EditItemModal';
+import currencyFormat from '../helpers/currency-format';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { withStyles } from '@material-ui/core/styles';
 import { IconButton, Box, Typography, Container, Grid } from '@material-ui/core';
@@ -45,6 +46,16 @@ export default withStyles(styles) (class ManagementItem extends Component {
         deleteItem: PropTypes.func.isRequired
     }
 
+    constructor(props) {
+        super(props);
+    }
+    
+    
+    formatReal = (int) => {
+        console.log('INT:',int)
+        return currencyFormat.formatReal(int);
+    }
+
     render() {
         const { classes } = this.props;
         const { itemName, itemPrice, _id } = this.props.item;
@@ -59,7 +70,7 @@ export default withStyles(styles) (class ManagementItem extends Component {
                         { itemName }
                     </Typography>
                     <Typography noWrap className={ classes.price } align='center'>
-                        { <span>R${itemPrice}</span> }
+                        {this.formatReal(itemPrice)}
                     </Typography>
                 </Container>                
                 <Grid container fixed className={ classes.actions }
@@ -69,10 +80,10 @@ export default withStyles(styles) (class ManagementItem extends Component {
                             id={ _id }/>
                     </Grid>
                     <Grid item xs={6}>
-                        <IconButton onClick={() => {
-                            this.props.deleteItem(_id)}}>
-                            <DeleteForeverIcon />
-                        </IconButton>
+                    <IconButton onClick={() => {
+                        this.props.deleteItem(_id)}}>
+                        <DeleteForeverIcon />
+                    </IconButton>
                     </Grid>
                 </Grid>
             </Box>
