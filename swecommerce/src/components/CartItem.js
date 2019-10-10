@@ -2,9 +2,29 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import promos from '../helpers/promo-helper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import {TextField, Select, IconButton} from '@material-ui/core';
+import {TextField, Select, IconButton, Typography, TableRow, TableCell} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
-export default class CartItem extends Component {
+const styles = theme => ({
+    cartItem: {             
+    },
+    typos: {
+        fontSize: 15,
+        fontWeight: 700,
+        color: "#777777",
+    },
+    quantity: {
+        maxWidth: 48,
+    },
+    icon: {
+        maxWidth: 48,
+    },
+    title: {
+        minWidth: 400,
+    }
+});
+
+export default withStyles(styles) (class CartItem extends Component {
     static propTypes = {
         cartItem: PropTypes.object.isRequired,
         deleteCartItem: PropTypes.func.isRequired,
@@ -23,14 +43,25 @@ export default class CartItem extends Component {
         console.log(promos)
         this.setState({ promosList: Object.keys(promos) })
     }
-
     render() {
         const { item, quantity, promo, totalPrice } = this.props.cartItem;
-        return (
-            <tr>        
-                <td>{ item.itemName }</td>
-                <td>{ item.itemPrice }</td>
-                <td><TextField
+        const { classes } = this.props;
+
+        return (   
+            <TableRow key={item._id}>
+                <TableCell  className={classes.title}>
+                    <Typography noWrap className={classes.typos}>
+                        { item.itemName }
+                    </Typography>
+                </TableCell>
+                <TableCell align="right">
+                    <Typography className={classes.typos}>
+                        { item.itemPrice }
+                    </Typography>
+                </TableCell>
+                <TableCell align="center">
+                    <TextField
+                        className={classes.quantity}
                         value={ quantity }
                         onChange={                            
                             (e) => { this.props.updateQuantity(item._id, e) }
@@ -40,8 +71,10 @@ export default class CartItem extends Component {
                         shrink: true,
                         }}
                         margin="normal"
-                    /></td>
-                <td> <Select native                      
+                    />
+                </TableCell>
+                <TableCell align="center">
+                    <Select native                      
                         value={ promo }
                         onChange={ 
                             (e) => { this.props.selectPromo(item._id, e) }
@@ -55,15 +88,20 @@ export default class CartItem extends Component {
                                 </option>;
                             })
                         }
-                    </Select> </td>
-                <td>{ totalPrice }</td>
-                <td>
+                    </Select>
+                </TableCell>
+                <TableCell align="right">
+                    <Typography className={classes.typos}>
+                        { totalPrice }
+                    </Typography>
+                </TableCell>
+                <TableCell className={classes.icon}>
                     <IconButton dense="dense" onClick={() => {
                         this.props.deleteCartItem(item._id)}}>
                         <DeleteForeverIcon />
                     </IconButton>
-                </td>
-            </tr>
+                </TableCell>
+            </TableRow>              
         );
     }
-}
+})

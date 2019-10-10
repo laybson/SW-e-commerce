@@ -72,9 +72,23 @@ const cart = {
         return []
     },
 
+    getTotalQuantity() {
+        let totalQuantity = 0;
+        let cart = [];
+        if (typeof window !== "undefined") {
+            if (localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'))
+            }
+            cart.forEach(cartItem => {
+                totalQuantity = totalQuantity + cartItem.quantity;                
+            });
+        }
+        return totalQuantity;
+    },
+
     getTotalPrice() {
         let totalPrice = 0;
-        let cart = []
+        let cart = [];
         if (typeof window !== "undefined") {
             if (localStorage.getItem('cart')) {
                 cart = JSON.parse(localStorage.getItem('cart'))

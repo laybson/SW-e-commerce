@@ -1,30 +1,64 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+import { withStyles } from '@material-ui/core/styles';
+import { 
+    AppBar, 
+    Toolbar, 
+    Typography, 
+    IconButton} from '@material-ui/core';
 
-export default class Navbar extends Component {
+const styles = theme => ({
+    navbar: {
+        flexGrow: 1,
+        backgroundColor: '#C3293A',     
+    },
+    title: {
+        display: 'block',
+        color: 'white',
+    },
+    rightSection: {
+        color: 'white',
+        display: 'flex',
+        
+    },
+    icon: {
+        color: 'white',
+    },
+});
+
+export default withStyles(styles) (class Navbar extends Component {
     render() {
+        const { classes } = this.props;
+
+
+
         return (
-            <nav className="navbar navbar-dark navbar-red navbar-expand-lg">
-                <div className="container">
-                    <Link to="/" className="navbar-brand">SW e-commerce</Link>
-                    <div className="collapse navbar-collapse">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="navbar-item">
-                                <Link to="/" className="nav-link">Itens</Link>
-                            </li>
-                            <li className="navbar-item">
-                                <Link to="/create" className="nav-link">Adicionar Item</Link>
-                            </li>
-                            <li className="navbar-item">
-                                <Link to="/cart" className="nav-link">
-                                    <ShoppingCartIcon />
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <div>
+                <AppBar position="static"  className={ classes.navbar }>
+                    <Toolbar>
+                        <Link to="/">
+                            <Typography className={ classes.title }  variant="h6" noWrap>
+                                SW e-commerce
+                            </Typography>                        
+                        </Link>
+                        <div className={classes.navbar} />
+                        <div className={classes.rightSection}>
+                            <Link to="/create">
+                                <IconButton>
+                                    <LibraryAddIcon className={ classes.icon } />                                    
+                                </IconButton>
+                            </Link>
+                            <Link to="/cart">
+                                <IconButton>
+                                    <ShoppingCartIcon className={ classes.icon }/>
+                                </IconButton>
+                            </Link>
+                        </div>
+                    </Toolbar>
+                </AppBar>
+            </div>
         );
     }
-}
+})

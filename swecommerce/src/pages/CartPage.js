@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import CartItemsList from '../components/CartItemsList';
+import { withStyles } from '@material-ui/core/styles';
 
-export default class Cart extends Component {
+const styles = theme => ({
+    cart: {
+     
+    },
+});
+
+export default withStyles(styles) (class Cart extends Component {
     
     render() {
+        const { classes } = this.props;
+
         return (
-            <div>
-                <h3>Cart Items</h3>
+            <div className={ classes.cart }>
+                <h5>Meu carrinho</h5>
                 <CartItemsList />
             </div>
         );
     }
-}
+})

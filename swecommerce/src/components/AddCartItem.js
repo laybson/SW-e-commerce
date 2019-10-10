@@ -2,10 +2,33 @@ import React, { Component } from 'react';
 import cart from '../helpers/cart-helper';
 import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+    addCartItem: {
+        borderRadius: 100,
+        minHeight: 30,
+        padding: "0 1em",
+        "&.MuiButton--large": {
+            minHeight: 39
+        },
+        textTransform: "none",
+        fontSize: 15,
+        fontWeight: 700,
+        transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
+        '&:hover': {
+          transform: 'scale(1.2)',
+        },
+    },
+    iconAdd: {
+        width: '70%',
+    },
+    'hover': {
+        transform: 'scale(2.1)',
+      },
+});
 
-
-export default class AddCartItem extends Component {
+export default withStyles(styles) (class AddCartItem extends Component {
     constructor(props) {
         super(props);
 
@@ -22,11 +45,13 @@ export default class AddCartItem extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
-            <Button variant="outlined"  onClick={(e) => {
-                this.addingCartItem(e)}}>
-                <span><AddShoppingCartIcon /> </span>  Comprar
+            <Button variant="outlined"  className={ classes.addCartItem }
+                onClick={(e) => { this.addingCartItem(e) }}>
+                <span><AddShoppingCartIcon className={ classes.iconAdd } /> </span>  Comprar
             </Button>
         );
     }
-}
+})

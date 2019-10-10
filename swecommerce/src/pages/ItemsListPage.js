@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import CartItemsList from '../components/CartItemsList';
 import Item from '../components/Item';
 import axios from 'axios';
-import { GridList, GridListTile } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+    itemsList: {
+        backgroundColor: 'white',         
+    },
+    grid: {
+        flexGrow: 1,
+    },
+});
 
-export default class ItemsList extends Component {
+export default withStyles(styles) (class ItemsList extends Component {        
     constructor(props) {
         super(props);
 
@@ -15,7 +24,7 @@ export default class ItemsList extends Component {
         this.state = {
             items: []
         };
-    }
+    }    
 
     componentDidMount() {
         axios.get('http://localhost:5000/items/')
@@ -48,27 +57,33 @@ export default class ItemsList extends Component {
 
     itemsList() {
         return this.state.items.map((currentItem, i) => (
-            <GridListTile key={i}>
+            <Grid key={i}>
               <Item 
                 item={ currentItem }
                 deleteItem={ this.deleteItem }
                 key={ currentItem._id }/>
-            </GridListTile>
+            </Grid>
         ))
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
-            <div>
-                <h4>Explore nossa loja!</h4>
+            <div className={ classes.itemsList }>
+                <h5>Explore nossa loja!</h5>
                 <div>
                     <div>
-                        <GridList cols={3}>
-                            { this.itemsList() }
-                        </GridList>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <Grid container justify="center">
+                                    { this.itemsList() }
+                                </Grid>
+                            </Grid>
+                        </Grid>
                     </div>
                 </div>                
             </div>
         );
     }
-}
+})

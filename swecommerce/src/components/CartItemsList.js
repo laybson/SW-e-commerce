@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import CartItem from './CartItem';
 import cart from '../helpers/cart-helper';
+import { withStyles } from '@material-ui/core/styles';
+import { Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
 
-export default class CartItemsList extends Component {
+const styles = theme => ({
+    cartItemsList: {
+        fontSize: 15,
+        width: '100%',
+        fontWeight: 700,
+    },
+    th: {
+        fontSize: 15,
+        fontWeight: 700,
+    }
+});
+
+export default withStyles(styles) (class CartItemsList extends Component {
     constructor(props) {
         super(props);
 
@@ -60,27 +74,31 @@ export default class CartItemsList extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
             <div>
-                <table className="table">
-                    <thead className="thead-light">
-                        <tr>
-                            <th>Item</th>
-                            <th>Preço</th>
-                            <th>Quantidade</th>
-                            <th>Promoção</th>
-                            <th>Preço Total</th>
-                            <th> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Table className={classes.cartItemsList}>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell className={classes.th} align="center">Item</TableCell>
+                            <TableCell className={classes.th} align="center">Preço</TableCell>
+                            <TableCell className={classes.th} align="center">Quantidade</TableCell>
+                            <TableCell className={classes.th} align="center">Promoção</TableCell>
+                            <TableCell className={classes.th} align="center">Subtotal</TableCell>
+                            <TableCell colSpan={3}/>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
                         { this.cartItemsList() }
-                    </tbody>
-                </table>
-                <div>
-                    <h5>Total: { this.state.totalPrice }</h5>
-                </div>
+                        <TableRow>
+                            <TableCell colSpan={3} />
+                            <TableCell className={classes.th} colSpan={2}>Preço Total:</TableCell>
+                            <TableCell className={classes.th} align="right">{ this.state.totalPrice }</TableCell>               
+                        </TableRow>
+                    </TableBody>     
+                </Table>
             </div>
         );
     }
-}
+})

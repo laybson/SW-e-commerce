@@ -7,7 +7,7 @@ const itemSchema = new Schema({
         required: true,
         trim: true,
         minlength: 3,
-        maxlength: 200
+        maxlength: 100
     },
     itemPrice: {
         type: Number,

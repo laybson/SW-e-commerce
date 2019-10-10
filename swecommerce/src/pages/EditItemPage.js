@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { withStyles } from '@material-ui/core/styles';
 
-export default class EditItem extends Component {
+const styles = theme => ({
+    editItem: {
+     
+    },
+});
+
+export default withStyles(styles) (class EditItem extends Component {
     constructor(props) {
         super(props);
 
@@ -57,8 +64,10 @@ export default class EditItem extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
-            <div>
+            <div className={ classes.editItem }>
                 <h3>Edit Item</h3>
                 <form onSubmit={ this.onSubmit }>
                     <div className="form-group">
@@ -88,4 +97,4 @@ export default class EditItem extends Component {
             </div>
         );
     }
-}
+})
