@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import promos from '../helpers/promo-helper';
 import currencyFormat from '../helpers/currency-format-helper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import {TextField, Select, IconButton, Typography, TableRow, TableCell} from '@material-ui/core';
+import {Tooltip, TextField, Select, IconButton, Typography, TableRow, TableCell} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -97,10 +97,12 @@ export default withStyles(styles) (class CartItem extends Component {
                     </Typography>
                 </TableCell>
                 <TableCell className={classes.icon}>
-                    <IconButton dense="dense" onClick={() => {
-                        this.props.deleteCartItem(item._id)}}>
-                        <DeleteForeverIcon />
-                    </IconButton>
+                    <Tooltip title={'Remover '+item.itemName+' do carrinho'}>
+                        <IconButton dense="dense" onClick={() => {
+                            this.props.deleteCartItem(item._id)}}>
+                            <DeleteForeverIcon />
+                        </IconButton>
+                    </Tooltip>
                 </TableCell>
             </TableRow>              
         );

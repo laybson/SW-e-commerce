@@ -7,7 +7,8 @@ import {
     AppBar, 
     Toolbar, 
     Typography, 
-    IconButton} from '@material-ui/core';
+    IconButton,
+    Tooltip,} from '@material-ui/core';
 
 const styles = theme => ({
     navbar: {
@@ -28,32 +29,38 @@ const styles = theme => ({
     },
 });
 
+
 export default withStyles(styles) (class Navbar extends Component {
+    
     render() {
         const { classes } = this.props;
 
-
-
         return (
             <div>
-                <AppBar position="static"  className={ classes.navbar }>
+                <AppBar position="fixed"  className={ classes.navbar }>
                     <Toolbar>
                         <Link to="/">
-                            <Typography className={ classes.title }  variant="h6" noWrap>
-                                SW e-commerce
-                            </Typography>                        
+                            <Tooltip title="Explorar Loja">
+                                <Typography className={ classes.title }  variant="h6" noWrap>
+                                    SW e-commerce
+                                </Typography>
+                            </Tooltip>
                         </Link>
                         <div className={classes.navbar} />
                         <div className={classes.rightSection}>
                             <Link to="/management">
-                                <IconButton>
-                                    <LibraryAddIcon className={ classes.icon } />                                    
-                                </IconButton>
+                                <Tooltip title="Gerenciar Itens">
+                                    <IconButton>
+                                        <LibraryAddIcon className={ classes.icon } />                                    
+                                    </IconButton>
+                                </Tooltip>
                             </Link>
                             <Link to="/cart">
-                                <IconButton>
-                                    <ShoppingCartIcon className={ classes.icon }/>
-                                </IconButton>
+                                <Tooltip title="Meu Carrinho">
+                                    <IconButton>
+                                        <ShoppingCartIcon className={ classes.icon }/>
+                                    </IconButton>
+                                </Tooltip>
                             </Link>
                         </div>
                     </Toolbar>

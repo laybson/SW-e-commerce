@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     itemsList: {
-        backgroundColor: 'white',         
+        marginTop: 64,         
     },
     grid: {
         flexGrow: 1,

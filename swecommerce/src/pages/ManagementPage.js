@@ -6,8 +6,8 @@ import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
-    itemsList: {
-        backgroundColor: 'white',         
+    management: {
+        marginTop: 64,
     },
     grid: {
         flexGrow: 1,
@@ -61,7 +61,7 @@ export default withStyles(styles) (class Management extends Component {
         const { classes } = this.props; 
 
         return (
-            <div className={ classes.itemsList }>
+            <div className={ classes.management }>
                 <CreateItemModal />                             
                 <div>
                     <div>

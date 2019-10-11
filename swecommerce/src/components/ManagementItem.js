@@ -4,7 +4,7 @@ import EditItemModal from './EditItemModal';
 import currencyFormat from '../helpers/currency-format-helper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { withStyles } from '@material-ui/core/styles';
-import { IconButton, Box, Typography, Container, Grid } from '@material-ui/core';
+import { IconButton, Box, Typography, Container, Grid, Tooltip } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -53,7 +53,7 @@ export default withStyles(styles) (class ManagementItem extends Component {
         return (
             <Box className={ classes.managementItem } border={1}>
                 <Container fixed  className={ classes.image }>
-                    
+                    <Box></Box>
                 </Container>
                 <Container fixed>
                     <Typography className={ classes.title } align='center'>
@@ -65,16 +65,20 @@ export default withStyles(styles) (class ManagementItem extends Component {
                 </Container>                
                 <Grid container className={ classes.actions }
                     align='center'>
-                    <Grid item xs={6}>
-                        <EditItemModal
-                            id={ _id }/>
-                    </Grid>
-                    <Grid item xs={6}>
-                    <IconButton onClick={() => {
-                        this.props.deleteItem(_id)}}>
-                        <DeleteForeverIcon />
-                    </IconButton>
-                    </Grid>
+                    <Tooltip title={'Editar '+itemName}>
+                        <Grid item xs={6}>
+                            <EditItemModal
+                                id={ _id }/>
+                        </Grid>
+                    </Tooltip>
+                    <Tooltip title={'Excluir '+itemName}>
+                        <Grid item xs={6}>
+                            <IconButton onClick={() => {
+                                this.props.deleteItem(_id)}}>
+                                <DeleteForeverIcon />
+                            </IconButton>
+                        </Grid>
+                    </Tooltip>
                 </Grid>
             </Box>
         );

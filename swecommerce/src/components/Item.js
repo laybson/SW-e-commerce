@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import AddCartItem from './AddCartItem';
 import currencyFormat from '../helpers/currency-format-helper';
 import { withStyles } from '@material-ui/core/styles';
-import { Box, Typography, Container } from '@material-ui/core';
+import { Box, Typography, Container, Tooltip } from '@material-ui/core';
 
 const styles = theme => ({
     Item: {
@@ -48,22 +48,24 @@ export default withStyles(styles) (class Item extends Component {
         const { itemName, itemPrice } = this.props.item;
         
         return (
-            <Box className={ classes.Item } border={1}>
+            <Box className={ classes.Item } border={1}>                
                 <Container fixed  className={ classes.image }>
-                    
+                    <Box></Box>                    
                 </Container>
                 <Container fixed>
                     <Typography className={ classes.title } align='center'>
                         { itemName }
-                    </Typography>
+                    </Typography>                        
                     <Typography noWrap className={ classes.price } align='center'>
                         {currencyFormat.formatReal(itemPrice)}
                     </Typography>
                 </Container>
+                <Tooltip title={ itemName }>
                 <Container fixed  className={ classes.add }>
-                    <AddCartItem
-                        item={ this.props.item }/>
-                </Container>                
+                        <AddCartItem
+                            item={ this.props.item }/>
+                </Container>
+                </Tooltip>
             </Box>
         );
     }
