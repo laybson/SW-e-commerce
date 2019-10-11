@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import currencyFormat from '../helpers/currency-format-helper';
 import { withStyles } from '@material-ui/core/styles';
-import { Modal, Fab } from '@material-ui/core';
+import { Modal, Fab, TextField, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
@@ -28,7 +29,28 @@ const styles = theme => ({
         '&:hover': {
           transform: 'scale(1.2)',
         },
-    }
+    },
+    create: {
+        borderRadius: 100,
+        minHeight: 30,
+        padding: "0 1em",
+        "&.MuiButton--large": {
+            minHeight: 39
+        },
+        textTransform: "none",
+        fontSize: 15,
+        fontWeight: 700,
+        transition: '0.3s cubic-bezier(.47,1.64,.41,.8)',
+        '&:hover': {
+          transform: 'scale(1.2)',
+        },
+    },
+    form: {
+        textAlign: 'center'
+    },
+    iconAdd: {
+        width: '70%',
+    },
 });
 
 export default withStyles(styles) (class CreateItemModal extends Component {
@@ -44,6 +66,7 @@ export default withStyles(styles) (class CreateItemModal extends Component {
         this.state = {
             itemName: '',
             itemPrice: 0,
+            maskedPrice: "R$ 0,00",
             open: false
         }
     }
@@ -61,8 +84,11 @@ export default withStyles(styles) (class CreateItemModal extends Component {
     }
 
     onChangeItemPrice(e) {
+        let intPrice = currencyFormat.getMoney(e.target.value);
+        let realPrice = currencyFormat.formatReal(intPrice);
         this.setState({
-            itemPrice: e.target.value
+            itemPrice: intPrice,
+            maskedPrice: realPrice
         });
     }
 
@@ -100,7 +126,7 @@ export default withStyles(styles) (class CreateItemModal extends Component {
           transform: `translate(-${top}%, -${left}%)`,
         };
     }
-
+    
     render() {
         const { classes } = this.props;
 
@@ -120,30 +146,34 @@ export default withStyles(styles) (class CreateItemModal extends Component {
                     open={this.state.open}
                     onClose={this.handleClose}>
                     <div style={this.getModalStyle()} className={ classes.createItemModal }>                    
-                        <h4>Adicionar Novo Item</h4>
-                        <form onSubmit={ this.onSubmit }>
-                            <div className="form-group">
-                                <label>Item Name: </label>
-                                <input
-                                    type="text"
-                                    required
-                                    className="form-control"
-                                    value={ this.state.itemName }
-                                    onChange={ this.onChangeItemName }/>                            
-                            </div>
-                            <div className="form-group">
-                                <label>Item Price:</label>
-                                <input
-                                    type="number"
-                                    className="form-control"
-                                    value={ this.state.itemPrice }
-                                    onChange={ this.onChangeItemPrice }/>
-                            </div>
-                            <div className="form-group">
-                                <input 
-                                    type="submit"
-                                    value="Create Item"
-                                    className="btn btn-primary"/>
+                        
+                        <form className={classes.form}>
+                            <h5>Adicionar Novo Item</h5>
+                            <TextField
+                                required
+                                value={ this.state.itemName }
+                                label="Nome"
+                                margin="normal"
+                                onChange={ this.onChangeItemName }
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            <TextField
+                                required
+                                value={ this.state.maskedPrice }
+                                label="Preço"
+                                margin="normal"
+                                onChange={ this.onChangeItemPrice }
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
+                            <div>
+                                <Button variant="outlined"  className={ classes.create }
+                                    onClick={ this.onSubmit }>
+                                    <span><AddIcon className={ classes.iconAdd } /> </span> Criar Item
+                                </Button>
                             </div>
                         </form>
                     </div>

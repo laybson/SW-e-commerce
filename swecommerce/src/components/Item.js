@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AddCartItem from './AddCartItem';
+import currencyFormat from '../helpers/currency-format-helper';
 import { withStyles } from '@material-ui/core/styles';
 import { Box, Typography, Container } from '@material-ui/core';
 
@@ -56,7 +57,7 @@ export default withStyles(styles) (class Item extends Component {
                         { itemName }
                     </Typography>
                     <Typography noWrap className={ classes.price } align='center'>
-                        { <span>R${itemPrice}</span> }
+                        {currencyFormat.formatReal(itemPrice)}
                     </Typography>
                 </Container>
                 <Container fixed  className={ classes.add }>

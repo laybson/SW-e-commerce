@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import promos from '../helpers/promo-helper';
+import currencyFormat from '../helpers/currency-format-helper';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {TextField, Select, IconButton, Typography, TableRow, TableCell} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -56,7 +57,7 @@ export default withStyles(styles) (class CartItem extends Component {
                 </TableCell>
                 <TableCell align="right">
                     <Typography className={classes.typos}>
-                        { item.itemPrice }
+                        { currencyFormat.formatReal(item.itemPrice) }
                     </Typography>
                 </TableCell>
                 <TableCell align="center">
@@ -92,7 +93,7 @@ export default withStyles(styles) (class CartItem extends Component {
                 </TableCell>
                 <TableCell align="right">
                     <Typography className={classes.typos}>
-                        { totalPrice }
+                        { currencyFormat.formatReal(totalPrice) }
                     </Typography>
                 </TableCell>
                 <TableCell className={classes.icon}>

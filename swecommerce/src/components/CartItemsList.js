@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CartItem from './CartItem';
 import cart from '../helpers/cart-helper';
+import currencyFormat from '../helpers/currency-format-helper';
 import { withStyles } from '@material-ui/core/styles';
 import { Table, TableHead, TableCell, TableRow, TableBody } from '@material-ui/core';
 
@@ -94,7 +95,7 @@ export default withStyles(styles) (class CartItemsList extends Component {
                         <TableRow>
                             <TableCell colSpan={3} />
                             <TableCell className={classes.th} colSpan={2}>Preço Total:</TableCell>
-                            <TableCell className={classes.th} align="right">{ this.state.totalPrice }</TableCell>               
+                            <TableCell className={classes.th} align="right">{ currencyFormat.formatReal(this.state.totalPrice) }</TableCell>               
                         </TableRow>
                     </TableBody>     
                 </Table>
