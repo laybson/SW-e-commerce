@@ -102,7 +102,7 @@ export default withStyles(styles) (class CreateItemModal extends Component {
 
         console.log(item);
 
-        axios.post('http://localhost:5000/items/add', item)
+        axios.post('/items/add', item)
             .then(res => console.log(res.data));
 
         window.location = '/management';

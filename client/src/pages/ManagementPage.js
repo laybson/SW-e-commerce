@@ -27,7 +27,7 @@ export default withStyles(styles) (class Management extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/items/')
+        axios.get('/items/')
             .then(response => {
                 this.setState({
                     items: response.data
@@ -39,7 +39,7 @@ export default withStyles(styles) (class Management extends Component {
     }    
 
     deleteItem(id) {
-        axios.delete('http://localhost:5000/items/'+id)
+        axios.delete('/items/'+id)
             .then(res => console.log(res.data));            
         this.setState({
             items: this.state.items.filter(el => el._id !== id)

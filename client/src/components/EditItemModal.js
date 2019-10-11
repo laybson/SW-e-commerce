@@ -60,7 +60,7 @@ export default withStyles(styles) (class EditItemModal extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/items/'+this.props.id)
+        axios.get('/items/'+this.props.id)
             .then(response => {
                 this.setState({
                     itemName: response.data.itemName,
@@ -96,7 +96,7 @@ export default withStyles(styles) (class EditItemModal extends Component {
             itemPrice: this.state.itemPrice,
         }
 
-        axios.post('http://localhost:5000/items/update/'+this.props.id, item)
+        axios.post('/items/update/'+this.props.id, item)
             .then(res => console.log(res.data));
 
         window.location = '/management';
