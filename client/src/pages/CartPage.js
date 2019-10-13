@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CartItemsList from '../components/CartItemsList';
 import cart from '../helpers/cart-helper';
 import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { Typography, Container } from '@material-ui/core';
 
 const styles = theme => ({
     cart: {
@@ -29,7 +29,9 @@ export default withStyles(styles) (class Cart extends Component {
         let page;
         if(this.hasCartItems()){
             page =  <div>
-                        <h5>Meu carrinho</h5>
+                        <Typography variant="h6" gutterBottom>
+                            Meu carrinho
+                        </Typography>
                         <CartItemsList />
                     </div>
         } else {
@@ -41,9 +43,9 @@ export default withStyles(styles) (class Cart extends Component {
         }
 
         return (
-            <div className={ classes.cart }>
+            <Container className={ classes.cart }>
                 {page}
-            </div>
+            </Container>
         );
     }
 })

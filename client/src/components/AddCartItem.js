@@ -21,7 +21,7 @@ const styles = theme => ({
         },
     },
     iconAdd: {
-        width: '70%',
+        height: '70%',
     },
     'hover': {
         transform: 'scale(2.1)',
@@ -50,7 +50,7 @@ export default withStyles(styles) (class AddCartItem extends Component {
         return (
             <Button variant="outlined"  className={ classes.addCartItem }
                 onClick={(e) => { this.addingCartItem(e) }}>
-                <span><AddShoppingCartIcon className={ classes.iconAdd } /> </span>  Comprar
+                <AddShoppingCartIcon className={ classes.iconAdd } />  Comprar
             </Button>
         );
     }

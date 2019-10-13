@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import currencyFormat from '../helpers/currency-format-helper';
 import { withStyles } from '@material-ui/core/styles';
-import { Modal, Fab, TextField, Button } from '@material-ui/core';
+import { Modal, Fab, TextField, Button, Typography } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
@@ -15,7 +15,11 @@ const styles = theme => ({
         padding: theme.spacing(2, 4, 3),     
     },
     add: {
-        top: -12,
+        bottom: 'auto',
+        left: 25,
+        top: 84,
+        right: 'auto',
+        position: 'fixed',
         borderRadius: 100,
         minHeight: 30,
         padding: "0 1em",
@@ -49,7 +53,8 @@ const styles = theme => ({
         textAlign: 'center'
     },
     iconAdd: {
-        width: '70%',
+        height: 20,
+        width: 20,       
     },
 });
 
@@ -148,27 +153,33 @@ export default withStyles(styles) (class CreateItemModal extends Component {
                     <div style={this.getModalStyle()} className={ classes.createItemModal }>                    
                         
                         <form className={classes.form}>
-                            <h5>Adicionar Novo Item</h5>
-                            <TextField
-                                required
-                                value={ this.state.itemName }
-                                label="Nome"
-                                margin="normal"
-                                onChange={ this.onChangeItemName }
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                required
-                                value={ this.state.maskedPrice }
-                                label="Preço"
-                                margin="normal"
-                                onChange={ this.onChangeItemPrice }
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
+                            <Typography variant="h6" gutterBottom>
+                                Adicionar Novo Item
+                            </Typography>
+                            <div>
+                                <TextField
+                                    required
+                                    value={ this.state.itemName }
+                                    label="Nome"
+                                    margin="normal"
+                                    onChange={ this.onChangeItemName }
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <TextField
+                                    required
+                                    value={ this.state.maskedPrice }
+                                    label="Preço"
+                                    margin="normal"
+                                    onChange={ this.onChangeItemPrice }
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </div>
                             <div>
                                 <Button variant="outlined"  className={ classes.create }
                                     onClick={ this.onSubmit }>

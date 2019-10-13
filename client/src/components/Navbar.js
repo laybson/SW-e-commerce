@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Logo } from '../assets/logo.svg';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import { withStyles } from '@material-ui/core/styles';
 import { 
     AppBar, 
-    Toolbar, 
-    Typography, 
+    Toolbar,
     IconButton,
     Tooltip,} from '@material-ui/core';
 
@@ -17,7 +17,6 @@ const styles = theme => ({
     },
     title: {
         display: 'block',
-        color: 'white',
     },
     rightSection: {
         color: 'white',
@@ -41,9 +40,7 @@ export default withStyles(styles) (class Navbar extends Component {
                     <Toolbar>
                         <Link to="/">
                             <Tooltip title="Explorar Loja">
-                                <Typography className={ classes.title }  variant="h6" noWrap>
-                                    SW e-commerce
-                                </Typography>
+                                <Logo className={classes.title} fill="white" height="33" />
                             </Tooltip>
                         </Link>
                         <div className={classes.navbar} />

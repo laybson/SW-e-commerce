@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import currencyFormat from '../helpers/currency-format-helper';
 import { withStyles } from '@material-ui/core/styles';
-import { Modal, IconButton, Box, TextField, Button } from '@material-ui/core';
+import { Modal, IconButton, Box, TextField, Button, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
 const styles = theme => ({
@@ -37,7 +37,8 @@ const styles = theme => ({
         textAlign: 'center'
     },
     iconEdit: {
-        width: '70%',
+        height: 20,
+        width: 20,
     },
 });
 
@@ -135,27 +136,33 @@ export default withStyles(styles) (class EditItemModal extends Component {
                     onClose={this.handleClose}>
                     <div style={this.getModalStyle()} className={ classes.editItemModal }>
                         <form className={ classes.form }>
-                            <h5>Editar Item</h5>
-                            <TextField
-                                required
-                                value={ this.state.itemName }
-                                label="Nome"
-                                margin="normal"
-                                onChange={ this.onChangeItemName }
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                            <TextField
-                                required
-                                value={ this.state.maskedPrice }
-                                label="Preço"
-                                margin="normal"
-                                onChange={ this.onChangeItemPrice }
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
+                            <Typography variant="h6" gutterBottom>
+                                Editar Item
+                            </Typography>
+                            <div>
+                                <TextField
+                                    required
+                                    value={ this.state.itemName }
+                                    label="Nome"
+                                    margin="normal"
+                                    onChange={ this.onChangeItemName }
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <TextField
+                                    required
+                                    value={ this.state.maskedPrice }
+                                    label="Preço"
+                                    margin="normal"
+                                    onChange={ this.onChangeItemPrice }
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </div>
                             <div>
                                 <Button variant="outlined"  className={ classes.edit }
                                     onClick={ this.onSubmit }>
