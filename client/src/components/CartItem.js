@@ -29,7 +29,8 @@ export default withStyles(styles) (class CartItem extends Component {
     static propTypes = {
         cartItem: PropTypes.object.isRequired,
         deleteCartItem: PropTypes.func.isRequired,
-        updateQuantity: PropTypes.func.isRequired
+        updateQuantity: PropTypes.func.isRequired,
+        hasQuantity: PropTypes.func.isRequired,
     }
 
     constructor(props) {
@@ -41,7 +42,6 @@ export default withStyles(styles) (class CartItem extends Component {
     }
 
     componentDidMount = () => {
-        console.log(promos)
         this.setState({ promosList: Object.keys(promos) })
     }
     render() {
@@ -66,6 +66,9 @@ export default withStyles(styles) (class CartItem extends Component {
                         value={ quantity }
                         onChange={                            
                             (e) => { this.props.updateQuantity(item._id, e) }
+                        }
+                        onBlur={
+                            (e) => {  this.props.hasQuantity(item._id, e) }
                         }
                         type="number"
                         InputLabelProps={{

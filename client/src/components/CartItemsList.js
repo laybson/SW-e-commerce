@@ -23,6 +23,7 @@ export default withStyles(styles) (class CartItemsList extends Component {
 
         this.deleteCartItem = this.deleteCartItem.bind(this);
         this.updateQuantity = this.updateQuantity.bind(this);
+        this.hasQuantity = this.hasQuantity.bind(this);
         this.selectPromo = this.selectPromo.bind(this);
 
         this.state = {
@@ -45,7 +46,7 @@ export default withStyles(styles) (class CartItemsList extends Component {
         })
     }
     
-    updateQuantity = (id ,e) => {
+    updateQuantity = (id, e) => {
         e.preventDefault();
         cart.updateQuantity(id, e.target.value)
 
@@ -53,6 +54,17 @@ export default withStyles(styles) (class CartItemsList extends Component {
             cartItems: cart.getCart(),
             totalPrice: cart.getTotalPrice()
         })
+    }
+
+    hasQuantity = (id, e) => {
+        e.preventDefault();
+        if(e.target.value <= 0){
+            cart.deleteCartItem(id)
+            this.setState({ 
+                cartItems: cart.getCart(),
+                totalPrice: cart.getTotalPrice()
+            })
+        }
     }
 
     selectPromo = (id ,e) => {
@@ -69,6 +81,7 @@ export default withStyles(styles) (class CartItemsList extends Component {
                 cartItem={ currentCartItem }
                 deleteCartItem={ this.deleteCartItem }
                 updateQuantity={ this.updateQuantity }
+                hasQuantity={ this.hasQuantity }
                 selectPromo={ this.selectPromo }
                 key={ currentCartItem.item._id }/>
         })
