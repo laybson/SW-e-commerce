@@ -47,20 +47,16 @@ const cart = {
     },
 
     updateQuantity(itemID, quantity) {
-        //if(quantity <= 0){
-         //   this.deleteCartItem(itemID)
-        //} else {
-            let cart = []
-            if (typeof window !== "undefined") {
-                if (localStorage.getItem('cart')) {
-                    cart = JSON.parse(localStorage.getItem('cart'))
-                }
-                let itemIndex = this.cartItemIndex(cart, itemID)
-                cart[itemIndex].quantity = Number(quantity)
-                cart[itemIndex].totalPrice = this.cartItemTotalPrice(cart[itemIndex]);
-                localStorage.setItem('cart', JSON.stringify(cart))
+        let cart = []
+        if (typeof window !== "undefined") {
+            if (localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'))
             }
-      //  }        
+            let itemIndex = this.cartItemIndex(cart, itemID)
+            cart[itemIndex].quantity = Number(quantity)
+            cart[itemIndex].totalPrice = this.cartItemTotalPrice(cart[itemIndex]);
+            localStorage.setItem('cart', JSON.stringify(cart))
+        }    
     },
 
     getCart() {
